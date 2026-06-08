@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM 2026 · Veðmál í Mýrinni</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+
+  :root {
+    --bg: #EEEEEA;
+    --card: #FFFFFF;
+    --text: #111111;
+    --muted: #666666;
+    --border: #DDDDDA;
+    --accent1: #C8F0C0;
+    --accent2: #C0D8F5;
+    --accent3: #E8C8F5;
+    --accent4: #F5EAC0;
+    --accent5: #F5C8C8;
+    --accent6: #C0F0E8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 40px 60px 24px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+  }
+
+  .header-left h1 {
+    font-size: clamp(2.8rem, 5vw, 5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .header-left .subtitle {
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    color: var(--muted);
+    margin-top: 8px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .header-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .pot-label {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .pot-amount {
+    font-size: clamp(2rem, 3.5vw, 3.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+  }
+
+  .deadline-badge {
+    display: inline-block;
+    margin-top: 8px;
+    background: var(--text);
+    color: var(--bg);
+    font-size: clamp(0.7rem, 1vw, 0.85rem);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 2px;
+  }
+
+  /* ── GRID ── */
+  .grid-section {
+    padding: 40px 60px;
+    flex: 1;
+  }
+
+  .section-label {
+    font-size: clamp(0.7rem, 0.9vw, 0.8rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .participants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    border: 1px solid var(--border);
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-name {
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-countries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .country-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 0.02em;
+  }
+
+  .country-flag {
+    width: 22px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-info {
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    color: var(--muted);
+  }
+
+  .footer-info strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .footer-howto {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    color: var(--muted);
+    text-align: right;
+  }
+
+  .footer-howto strong {
+    color: var(--text);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 2px;
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+  }
+
+  /* ── ACCENT COLORS cycle ── */
+  .accent-0 { background: var(--accent1); }
+  .accent-1 { background: var(--accent2); }
+  .accent-2 { background: var(--accent3); }
+  .accent-3 { background: var(--accent4); }
+  .accent-4 { background: var(--accent5); }
+  .accent-5 { background: var(--accent6); }
+
+  .country-tag.ct-0 { background: var(--accent1); }
+  .country-tag.ct-1 { background: var(--accent2); }
+  .country-tag.ct-2 { background: var(--accent3); }
+  .country-tag.ct-3 { background: var(--accent4); }
+  .country-tag.ct-4 { background: var(--accent5); }
+  .country-tag.ct-5 { background: var(--accent6); }
+
+  .empty-state {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 80px 20px;
+    color: var(--muted);
+    font-size: 1.1rem;
+  }
+</style>
+</head>
+<body>
+
+<script>
+/* ============================================================
+   BREYTTU HÉR — uppfærðu þátttakendur og stillingar
+   ============================================================
+
+   Hvernig á að bæta við þátttakanda:
+   {
+     name: "Fullt nafn",
+     countries: ["Land 1", "Land 2"],   ← má vera mörg lönd
+     avatar: null                        ← null = upphafsstafir
+                                          eða: "https://mynd.url/mynd.jpg"
+   }
+
+   Lönd: notaðu íslensku eða enska heiti, t.d.:
+   "Argentína", "Frakkland", "Brasilía", "Þýskaland",
+   "Spánn", "England", "Portúgal", "Marókkó", "Japan",
+   "Mexíkó", "Bandaríkin", "Kanada" o.fl.
+   ============================================================ */
+
+const config = {
+  title: "HM 2026⚽🏆",
+  subtitle: "Veðmál í Mýrinni",
+  betPerCountry: 500,        // ISK á hvert land
+  deadline: "2026-06-18",    // Lokadagur skráningar
+  contactEmail: "777-7777",   // ← BREYTTU á réttan póst
+  contactNote: "Auraðu + skrifaðu nafn og land/lönd í skýringu"
+};
+
+const participants = [
+{ name: "Þórey Einarsdóttir",       countries: ["Brasilía", "Spánn"],              avatar: null },
+  { name: "Guðjón Samúelsson",                   countries: ["Frakkland"],         avatar: null },
+  { name: "Egill Skallagrímsson",               countries: ["Pólland", "Argentína"],            avatar: null },
+  { name: "Viktoría Bretadrottning",            countries: ["Pólland"],                         avatar: null },
+  { name: "Albert Einstein",               countries: ["Frakkland"],            avatar: null },
+  { name: "Ghandi",               countries: ["Danmörk"],                         avatar: null },
+  { name: "Þórbergur Þórðarson",    countries: ["Spánn", "Portúgal"],              avatar: null },
+  { name: "Bubbi Morthens",     countries: ["Brasilía"],                        avatar: null },
+  { name: "Meryl Streep",  countries: ["England", "Þýskaland", "Holland"], avatar: null },
+  { name: "Halla forseti",         countries: ["Danmörk", "Frakkland"],            avatar: null },
+{ name: "Hrólfur Jónsson",       countries: ["England", "Noregur"],              avatar: null },
+  { name: "Ódysseifur",       countries: ["Bandaríkin"],                      avatar: null },
+ 
+    { name: "Sveppagreifinn",           countries: ["Japan", "Mexíkó", "Kólumbía"],    avatar: null },
+  { name: "Atli Húnakonungur",         countries: ["Þýskaland"],                       avatar: null },
+  { name: "Rachmaninoff",       countries: ["Brasilía", "Spánn"],              avatar: null },
+{ name: "Gísli Karl Gíslason",       countries: ["Brasilía", "Spánn"],              avatar: null },
+ { name: "Tinni Sveinsson",      countries: ["Argentína", "Úrúgvæ"],            avatar: null },
+];
+
+/* ============================================================
+   FÁNALYKILTAFLA — þarft ekki að breyta þessu
+   ============================================================ */
+// ISO landsnúmer fyrir flagcdn.com myndir
+const flagMap = {
+  // Íslenska nöfn
+  "Argentína":"ar","Brasilía":"br","Frakkland":"fr","Þýskaland":"de",
+  "Spánn":"es","Portúgal":"pt","England":"gb-eng","Noregur":"no",
+  "Svíþjóð":"se","Danmörk":"dk","Holland":"nl","Belgía":"be",
+  "Ítalía":"it","Króatía":"hr","Serbía":"rs","Sviss":"ch",
+  "Austurríki":"at","Pólland":"pl","Ungverjaland":"hu","Tékkland":"cz",
+  "Rúmenía":"ro","Skotland":"gb-sct","Wales":"gb-wls","Tyrkland":"tr",
+  "Úkraína":"ua","Grikkland":"gr","Slóvakía":"sk","Albanía":"al",
+  "Slóvenía":"si","Finnland":"fi","Bandaríkin":"us","Mexíkó":"mx",
+  "Kanada":"ca","Kosta Ríka":"cr","Jamaíka":"jm","Panama":"pa",
+  "Úrúgvæ":"uy","Kólumbía":"co","Ekvaðor":"ec","Perú":"pe",
+  "Venesúela":"ve","Bolívía":"bo","Japan":"jp","Suður-Kórea":"kr",
+  "Ástralía":"au","Nýja Sjáland":"nz","Íran":"ir","Sádí-Arabía":"sa",
+  "Marókkó":"ma","Senegal":"sn","Gana":"gh","Nígería":"ng",
+  "Kaamerún":"cm","Egyptaland":"eg","Alabú":"ae","Katarland":"qa",
+  "Írak":"iq","Ísland":"is",
+  // Ensk nöfn
+  "Argentina":"ar","Brazil":"br","France":"fr","Germany":"de",
+  "Spain":"es","Portugal":"pt","Netherlands":"nl","Belgium":"be",
+  "Italy":"it","Croatia":"hr","Serbia":"rs","Switzerland":"ch",
+  "Austria":"at","Poland":"pl","Hungary":"hu","Morocco":"ma",
+  "Japan":"jp","USA":"us","Mexico":"mx","Canada":"ca",
+  "South Korea":"kr","Australia":"au","Colombia":"co","Ecuador":"ec",
+  "Uruguay":"uy","Turkey":"tr","Ukraine":"ua","Denmark":"dk",
+  "Sweden":"se","Norway":"no","Romania":"ro","Greece":"gr",
+  "Slovakia":"sk","Iceland":"is","Iran":"ir","Saudi Arabia":"sa",
+  "Senegal":"sn","Ghana":"gh","Nigeria":"ng",
+};
+</script>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-left">
+    <h1 id="main-title"></h1>
+    <div class="subtitle" id="main-subtitle"></div>
+  </div>
+  <div class="header-right">
+    <div class="pot-label">Potturinn stendur í</div>
+    <div class="pot-amount" id="pot-display">0 kr.</div>
+    <div class="deadline-badge" id="deadline-display"></div>
+  </div>
+</header>
+
+<!-- ── PARTICIPANT GRID ── -->
+<div class="grid-section">
+  <div class="section-label" id="count-label"></div>
+  <div class="participants-grid" id="grid"></div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-info">
+    <strong>500 kr. á hvert land</strong> — má leggja undir tvö
+  </div>
+  <div class="footer-howto">
+    <strong id="footer-note"></strong>
+    <span id="footer-email"></span>
+  </div>
+</footer>
+
+<script>
+const accentColors = ["#C8F0C0","#C0D8F5","#E8C8F5","#F5EAC0","#F5C8C8","#C0F0E8"];
+
+function getFlag(country) {
+  const code = flagMap[country];
+  if (!code) return `<span style="font-size:1rem">🏳</span>`;
+  return `<img class="country-flag" src="https://flagcdn.com/w40/${code}.png" alt="${country}">`;
+}
+
+function getInitials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join("").slice(0,2).toUpperCase();
+}
+
+function calcPot() {
+  let total = 0;
+  participants.forEach(p => {
+    total += (p.countries || []).length * config.betPerCountry;
+  });
+  return total;
+}
+
+function formatDeadline(dateStr) {
+  const d = new Date(dateStr);
+  const day = d.getDate();
+  const months = ["janúar","febrúar","mars","apríl","maí","júní","júlí","ágúst","september","október","nóvember","desember"];
+  return `Skráning lokast ${day}. ${months[d.getMonth()]}`;
+}
+
+function renderGrid() {
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  if (participants.length === 0) {
+    grid.innerHTML = `<div class="empty-state">Enginn hefur skráð sig ennþá — vertu fyrstur! 🏆</div>`;
+    return;
+  }
+
+  participants.forEach((p, i) => {
+    const color = accentColors[i % accentColors.length];
+    const card = document.createElement("div");
+    card.className = "card";
+
+    // Avatar
+    const avatarDiv = document.createElement("div");
+    avatarDiv.className = "avatar";
+    avatarDiv.style.background = color;
+    const avatarSrc = p.avatar ||
+      `https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=${encodeURIComponent(p.name)}&backgroundColor=${color.replace('#','')}`;
+    avatarDiv.innerHTML = `<img src="${avatarSrc}" alt="${p.name}" onerror="this.parentNode.textContent='${getInitials(p.name)}'">`;
+
+
+    // Info
+    const infoDiv = document.createElement("div");
+    infoDiv.className = "card-info";
+    infoDiv.innerHTML = `<div class="card-name">${p.name}</div>`;
+
+    const countries = document.createElement("div");
+    countries.className = "card-countries";
+    (p.countries || []).forEach((c, ci) => {
+      const tag = document.createElement("span");
+      tag.className = `country-tag ct-${(i + ci) % 6}`;
+      tag.innerHTML = `${getFlag(c)} ${c}`;
+      countries.appendChild(tag);
+    });
+    infoDiv.appendChild(countries);
+
+    card.appendChild(avatarDiv);
+    card.appendChild(infoDiv);
+    grid.appendChild(card);
+  });
+}
+
+function render() {
+  document.getElementById("main-title").textContent = config.title;
+  document.getElementById("main-subtitle").textContent = config.subtitle;
+
+  const pot = calcPot();
+  document.getElementById("pot-display").textContent =
+    pot.toLocaleString("is-IS") + " kr.";
+
+  document.getElementById("deadline-display").textContent =
+    formatDeadline(config.deadline);
+
+  const n = participants.length;
+  const bets = participants.reduce((s,p) => s + (p.countries||[]).length, 0);
+  document.getElementById("count-label").textContent =
+    n === 0
+      ? "Þátttakendur"
+      : `${n} þátttakend${n===1?"i":"ur"} · ${bets} veð`;
+
+  document.getElementById("footer-note").textContent = config.contactNote + ":";
+  document.getElementById("footer-email").textContent = config.contactEmail;
+
+  renderGrid();
+}
+
+render();
+</script>
+</body>
+</html>
