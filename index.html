@@ -269,9 +269,9 @@ const config = {
   title: "HM 2026⚽🏆",
   subtitle: "Veðmál í Mýrinni - Hvaða land vinnur HM?",
   betPerCountry: 500,        // ISK á hvert land
-  deadline: "2026-06-18",    // Lokadagur skráningar
+  deadline: "2026-07-19",    // Lokadagur skráningar
   contactEmail: "",   // ← BREYTTU á réttan póst
-  contactNote: "Taktu þátt: Skrifaðu nafn, símanúmer og land/lönd á Post-It miða hér á borðinu"
+  contactNote: "Potturinn skiptist á milli þeirra sem spá rétt."
 };
 
 const participants = [
@@ -365,7 +365,7 @@ const flagMap = {
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-info">
-    <strong>500 kr. á hvert land</strong> — má leggja undir tvö. Nánari upplýsingar í myrin@visindagardar.is.
+    <strong>Skyggnifáfa</strong> verður umbunuð í mótslok.
   </div>
   <div class="footer-howto">
     <strong id="footer-note"></strong>
@@ -398,7 +398,7 @@ function formatDeadline(dateStr) {
   const d = new Date(dateStr);
   const day = d.getDate();
   const months = ["janúar","febrúar","mars","apríl","maí","júní","júlí","ágúst","september","október","nóvember","desember"];
-  return `Skráning lokast ${day}. ${months[d.getMonth()]}`;
+  return `Úrslit verða ljós ${day}. ${months[d.getMonth()]}`;
 }
 
 function renderGrid() {
