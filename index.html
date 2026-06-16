@@ -271,7 +271,7 @@ const config = {
   betPerCountry: 500,        // ISK á hvert land
   deadline: "2026-07-19",    // Lokadagur skráningar
   contactEmail: "",   // ← BREYTTU á réttan póst
-  contactNote: "Potturinn skiptist á milli þeirra sem spá rétt."
+  contactNote: "Megi fótboltaguðirnir vera ykkur hliðhollir!"
 };
 
 const participants = [
@@ -365,7 +365,7 @@ const flagMap = {
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-info">
-    <strong>Skyggnifáfa</strong> verður umbunuð í mótslok.
+    <strong>Skyggnigáfa verður umbunuð</strong> í mótslok. Potturinn skiptist milli þeirra sem spá rétt. 
   </div>
   <div class="footer-howto">
     <strong id="footer-note"></strong>
@@ -463,7 +463,7 @@ function render() {
       ? "Þátttakendur"
       : `${n} þátttakend${n===1?"i":"ur"} · ${bets} veð`;
 
-  document.getElementById("footer-note").textContent = config.contactNote + ":";
+  document.getElementById("footer-note").textContent = config.contactNote + "";
   document.getElementById("footer-email").textContent = config.contactEmail;
 
   renderGrid();
