@@ -131,6 +131,7 @@
     align-items: center;
     gap: 12px;
     border: 1px solid var(--border);
+    position: relative; /* Bætt við fyrir staðsetningu á emoji */
   }
 
   .avatar {
@@ -159,6 +160,7 @@
   .card-info {
     flex: 1;
     min-width: 0;
+    padding-right: 14px; /* Gefur pláss svo texti fari ekki yfir emoji */
   }
 
   .card-name {
@@ -195,6 +197,15 @@
     display: inline-block;
     vertical-align: middle;
     border-radius: 1px;
+  }
+
+  /* Nýr stíll fyrir peningapokann */
+  .money-bag {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 18px;
+    line-height: 1;
   }
 
   /* ── FOOTER ── */
@@ -246,13 +257,6 @@
 <script>
 /* ============================================================
    BREYTTU HÉR — uppfærðu þátttakendur og stillingar
-   ============================================================
-   Hvernig á að bæta við þátttakanda:
-   {
-     name: "Fullt nafn",
-     countries: ["Land 1", "Land 2"],
-     avatar: null
-   }
    ============================================================ */
 
 const config = {
@@ -264,39 +268,39 @@ const config = {
 };
 
 const participants = [
-  { name: "Karl Pétur",      countries: ["Frakkland", "Noregur"],       avatar: null },
-  { name: "Gerður",          countries: ["England", "Frakkland"],        avatar: null },
-  { name: "Klara Rut",       countries: ["Argentína", "England"],        avatar: null },
-  { name: "Davíð",           countries: ["Brasilía"],                    avatar: null },
-  { name: "Guðmundur",       countries: ["Spánn", "Noregur"],           avatar: null },
-  { name: "Jóhanna Soffía",  countries: ["Portúgal"],                   avatar: null },
-  { name: "Haraldur",        countries: ["England", "Brasilía"],         avatar: null },
-  { name: "Brynja",          countries: ["Frakkland", "Þýskaland"],      avatar: null },
-  { name: "Eyþór",           countries: ["Frakkland", "Brasilía"],       avatar: null },
-  { name: "Sveinbjörn",      countries: ["Spánn"],                       avatar: null },
-  { name: "Tinni",           countries: ["Portúgal", "Holland"],         avatar: null },
-  { name: "Áslaug",          countries: ["Holland", "Frakkland"],        avatar: null },
-  { name: "Auður",           countries: ["Panama", "England"],           avatar: null },
-  { name: "Lilja Dögg",      countries: ["Argentína", "Frakkland"],      avatar: null },
-  { name: "Óttar",           countries: ["Portúgal", "Spánn"],          avatar: null },
-  { name: "Anna Margrét",    countries: ["Senegal", "Brasilía"],         avatar: null },
-  { name: "Atli Þór",        countries: ["Bandaríkin", "Frakkland"],     avatar: null },
-  { name: "Graham",          countries: ["Holland"],                      avatar: null },
-  { name: "Guðjón",          countries: ["Argentína", "Holland"],        avatar: null },
-  { name: "Kristinn",        countries: ["Þýskaland", "Portúgal"],       avatar: null },
-  { name: "Atli Björgvins",  countries: ["Spánn", "Egyptaland"],         avatar: null },
-  { name: "Anna Schalk",     countries: ["Holland"],                      avatar: null },
-  { name: "Ásta ",            countries: ["Kólumbía", "Spánn"],           avatar: null },
-  { name: "Gísli",           countries: ["Frakkland", "Brasilía"],       avatar: null },
-  { name: "Elísa",           countries: ["Portúgal", "Brasilía"],        avatar: null },
-  { name: "María",           countries: ["Frakkland", "Argentína"],      avatar: null },
-  { name: "Magnús Daði",     countries: ["England", "Spánn"],            avatar: null },
-  { name: "Marín",           countries: ["Belgía", "Spánn"],             avatar: null },
-  { name: "Andrea",          countries: ["Brasilía", "Portúgal"],        avatar: null },
-  { name: "Halla ",           countries: ["Argentína", "Frakkland"],      avatar: null },
-   { name: "Sunna",           countries: ["Egyptaland", "Frakkland"],     avatar: null },
-  { name: "Hjalti ",          countries: ["Spánn"],                       avatar: null },
-  { name: "Aron",           countries: ["Þýskaland", "England"],     avatar: null },
+  { name: "Karl Pétur",      countries: ["Frakkland", "Noregur"],       avatar: null, paid: "no" },
+  { name: "Gerður",          countries: ["England", "Frakkland"],        avatar: null, paid: "yes" },
+  { name: "Klara Rut",       countries: ["Argentína", "England"],        avatar: null, paid: "no" },
+  { name: "Davíð",           countries: ["Brasilía"],                    avatar: null, paid: "no" },
+  { name: "Guðmundur",       countries: ["Spánn", "Noregur"],           avatar: null, paid: "yes" },
+  { name: "Jóhanna Soffía",  countries: ["Portúgal"],                   avatar: null, paid: "no" },
+  { name: "Haraldur",        countries: ["England", "Brasilía"],         avatar: null, paid: "no" },
+  { name: "Brynja",          countries: ["Frakkland", "Þýskaland"],      avatar: null, paid: "yes" },
+  { name: "Eyþór",           countries: ["Frakkland", "Brasilía"],       avatar: null, paid: "yes" },
+  { name: "Sveinbjörn",      countries: ["Spánn"],                       avatar: null, paid: "no" },
+  { name: "Tinni",           countries: ["Portúgal", "Holland"],         avatar: null, paid: "yes" },
+  { name: "Áslaug",          countries: ["Holland", "Frakkland"],        avatar: null, paid: "yes" },
+  { name: "Auður",           countries: ["Panama", "England"],           avatar: null, paid: "yes" },
+  { name: "Lilja Dögg",      countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
+  { name: "Óttar",           countries: ["Portúgal", "Spánn"],          avatar: null, paid: "no" },
+  { name: "Anna Margrét",    countries: ["Senegal", "Brasilía"],         avatar: null, paid: "no" },
+  { name: "Atli Þór",        countries: ["Bandaríkin", "Frakkland"],     avatar: null, paid: "no" },
+  { name: "Graham",          countries: ["Holland"],                      avatar: null, paid: "no" },
+  { name: "Guðjón",          countries: ["Argentína", "Holland"],        avatar: null, paid: "no" },
+  { name: "Kristinn",        countries: ["Þýskaland", "Portúgal"],       avatar: null, paid: "yes" },
+  { name: "Atli Björgvins",  countries: ["Spánn", "Egyptaland"],         avatar: null, paid: "yes" },
+  { name: "Anna Schalk",     countries: ["Holland"],                      avatar: null, paid: "no" },
+  { name: "Ásta ",            countries: ["Kólumbía", "Spánn"],           avatar: null, paid: "no" },
+  { name: "Gísli",           countries: ["Frakkland", "Brasilía"],       avatar: null, paid: "no" },
+ { name: "Elísa",           countries: ["Portúgal", "Brasilía"],        avatar: null, paid: "no" },
+  { name: "María",           countries: ["Frakkland", "Argentína"],      avatar: null, paid: "no" },
+  { name: "Magnús Daði",     countries: ["England", "Spánn"],            avatar: null, paid: "yes" },
+ { name: "Marín",           countries: ["Belgía", "Spánn"],             avatar: null, paid: "no" },
+ { name: "Andrea",          countries: ["Brasilía", "Portúgal"],        avatar: null, paid: "no" },
+  { name: "Halla ",           countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
+  { name: "Sunna",           countries: ["Egyptaland", "Frakkland"],     avatar: null, paid: "yes" },
+  { name: "Hjalti ",          countries: ["Spánn"],                       avatar: null, paid: "no" },
+  { name: "Aron",           countries: ["Þýskaland", "England"],     avatar: null, paid: "yes" },
 ];
 
 /* ============================================================
@@ -331,7 +335,6 @@ const flagMap = {
 };
 </script>
 
-<!-- ── HEADER ── -->
 <header>
   <div class="header-left">
     <h1 id="main-title"></h1>
@@ -344,109 +347,10 @@ const flagMap = {
   </div>
 </header>
 
-<!-- ── PARTICIPANT GRID ── -->
 <div class="grid-section">
   <div class="section-label" id="count-label"></div>
   <div class="participants-grid" id="grid"></div>
 </div>
 
-<!-- ── FOOTER ── -->
 <footer>
-  <div class="footer-info">
-    <strong>Skyggnigáfa verður umbunuð</strong> í mótslok. Potturinn skiptist milli þeirra sem spá rétt.
-  </div>
-  <div class="footer-howto" id="footer-note"></div>
-</footer>
-
-<script>
-const accentColors = ["#C8F0C0","#C0D8F5","#E8C8F5","#F5EAC0","#F5C8C8","#C0F0E8"];
-
-function getFlag(country) {
-  const code = flagMap[country];
-  if (!code) return `<span style="font-size:0.9rem">🏳</span>`;
-  return `<img class="country-flag" src="https://flagcdn.com/w40/${code}.png" alt="${country}">`;
-}
-
-function getInitials(name) {
-  return name.trim().split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
-}
-
-function calcPot() {
-  return participants.reduce((s, p) => s + (p.countries || []).length * config.betPerCountry, 0);
-}
-
-function updateCountdown() {
-  const final = new Date(config.finalDate + "T00:00:00");
-  const now = new Date();
-  const days = Math.ceil((final - now) / (1000 * 60 * 60 * 24));
-  const el = document.getElementById("countdown-display");
-  if (days > 1)        el.textContent = `Úrslit verða ljós eftir ${days} daga`;
-  else if (days === 1) el.textContent = `Úrslit verða ljós á morgun`;
-  else if (days === 0) el.textContent = `Úrslit verða ljós Í DAG 🏆`;
-  else                 el.textContent = `Mótið er lokið 🏆`;
-}
-
-function renderGrid() {
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-  if (participants.length === 0) {
-    grid.innerHTML = `<div class="empty-state">Enginn hefur skráð sig ennþá — vertu fyrstur! 🏆</div>`;
-    return;
-  }
-  participants.forEach((p, i) => {
-    const color = accentColors[i % accentColors.length];
-    const card = document.createElement("div");
-    card.className = "card";
-
-    // Avatar
-    const avatarDiv = document.createElement("div");
-    avatarDiv.className = "avatar";
-    avatarDiv.style.background = color;
-    const seed = encodeURIComponent(p.name);
-    const bg = color.replace("#", "");
-    const avatarSrc = p.avatar || `https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=${seed}&backgroundColor=${bg}`;
-    avatarDiv.innerHTML = `<img src="${avatarSrc}" alt="${p.name}" onerror="this.parentNode.textContent='${getInitials(p.name)}'">`;
-
-    // Info
-    const infoDiv = document.createElement("div");
-    infoDiv.className = "card-info";
-    infoDiv.innerHTML = `<div class="card-name">${p.name}</div>`;
-
-    const countriesDiv = document.createElement("div");
-    countriesDiv.className = "card-countries";
-    (p.countries || []).forEach((c, ci) => {
-      const tag = document.createElement("span");
-      tag.className = `country-tag ct-${(i + ci) % 6}`;
-      tag.innerHTML = `${getFlag(c)} ${c}`;
-      countriesDiv.appendChild(tag);
-    });
-    infoDiv.appendChild(countriesDiv);
-
-    card.appendChild(avatarDiv);
-    card.appendChild(infoDiv);
-    grid.appendChild(card);
-  });
-}
-
-function render() {
-  document.getElementById("main-title").textContent = config.title;
-  document.getElementById("main-subtitle").textContent = config.subtitle;
-  document.getElementById("pot-display").textContent =
-    calcPot().toLocaleString("is-IS") + " kr.";
-
-  const n = participants.length;
-  const bets = participants.reduce((s, p) => s + (p.countries || []).length, 0);
-  document.getElementById("count-label").textContent =
-    n === 0 ? "Þátttakendur" : `${n} þátttakend${n === 1 ? "i" : "ur"} · ${bets} veð`;
-
-  document.getElementById("footer-note").textContent = config.contactNote;
-
-  updateCountdown();
-  setInterval(updateCountdown, 60000);
-  renderGrid();
-}
-
-render();
-</script>
-</body>
-</html>
+  <div class="footer
