@@ -5,7 +5,6 @@
 <title>HM 2026 · Veðmál í Mýrinni</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
-
   :root {
     --bg: #EEEEEA;
     --card: #FFFFFF;
@@ -19,9 +18,7 @@
     --accent5: #F5C8C8;
     --accent6: #C0F0E8;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
@@ -31,8 +28,6 @@
     display: flex;
     flex-direction: column;
   }
-
-  /* ── HEADER ── */
   header {
     padding: 16px 50px 14px;
     display: flex;
@@ -42,7 +37,6 @@
     gap: 20px;
     flex-shrink: 0;
   }
-
   .header-left h1 {
     font-size: clamp(1.8rem, 3vw, 3rem);
     font-weight: 900;
@@ -50,7 +44,6 @@
     line-height: 1;
     text-transform: uppercase;
   }
-
   .header-left .subtitle {
     font-size: clamp(0.75rem, 1.1vw, 1rem);
     color: var(--muted);
@@ -59,12 +52,10 @@
     text-transform: uppercase;
     font-weight: 600;
   }
-
   .header-right {
     text-align: right;
     flex-shrink: 0;
   }
-
   .pot-label {
     font-size: clamp(0.65rem, 0.85vw, 0.8rem);
     text-transform: uppercase;
@@ -72,14 +63,12 @@
     color: var(--muted);
     font-weight: 600;
   }
-
   .pot-amount {
     font-size: clamp(1.6rem, 2.8vw, 2.8rem);
     font-weight: 900;
     letter-spacing: -0.02em;
     line-height: 1.1;
   }
-
   .countdown-badge {
     display: inline-block;
     margin-top: 6px;
@@ -92,8 +81,6 @@
     padding: 4px 10px;
     border-radius: 2px;
   }
-
-  /* ── GRID SECTION ── */
   .grid-section {
     padding: 12px 50px 10px;
     flex: 1;
@@ -101,7 +88,6 @@
     display: flex;
     flex-direction: column;
   }
-
   .section-label {
     font-size: clamp(0.62rem, 0.8vw, 0.75rem);
     text-transform: uppercase;
@@ -111,7 +97,6 @@
     margin-bottom: 10px;
     flex-shrink: 0;
   }
-
   .participants-grid {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -120,8 +105,6 @@
     min-height: 0;
     align-content: stretch;
   }
-
-  /* ── CARD ── */
   .card {
     background: var(--card);
     border-radius: 4px;
@@ -130,9 +113,8 @@
     align-items: center;
     gap: 12px;
     border: 1px solid var(--border);
-    position: relative; /* Bætt við fyrir staðsetningu á emoji */
+    position: relative;
   }
-
   .avatar {
     width: 60px;
     height: 60px;
@@ -147,7 +129,6 @@
     color: rgba(0,0,0,0.6);
     overflow: hidden;
   }
-
   .avatar img {
     width: 100%;
     height: 100%;
@@ -155,13 +136,11 @@
     border-radius: 50%;
     display: block;
   }
-
   .card-info {
     flex: 1;
     min-width: 0;
-    padding-right: 14px; /* Gefur pláss svo texti fari ekki yfir emoji */
+    padding-right: 14px;
   }
-
   .card-name {
     font-size: clamp(0.95rem, 1.15vw, 1.15rem);
     font-weight: 800;
@@ -170,14 +149,12 @@
     text-overflow: ellipsis;
     line-height: 1.1;
   }
-
   .card-countries {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     margin-top: 6px;
   }
-
   .country-tag {
     display: inline-flex;
     align-items: center;
@@ -189,7 +166,6 @@
     letter-spacing: 0.01em;
     white-space: nowrap;
   }
-
   .country-flag {
     width: 18px;
     height: auto;
@@ -198,7 +174,42 @@
     border-radius: 1px;
   }
 
-  /* Nýr stíll fyrir peningapokann */
+  /* ── ELIMINATED ── */
+  .country-tag.eliminated {
+    background: #D0D0CC;
+    color: #888888;
+  }
+  .flag-wrap {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 0;
+  }
+  .flag-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(180,178,168,0.55);
+    border-radius: 1px;
+  }
+  .elim-name {
+    position: relative;
+    display: inline-block;
+  }
+  .elim-line1, .elim-line2 {
+    position: absolute;
+    top: 50%;
+    left: -2px;
+    right: -2px;
+    height: 3px;
+    background: #c0392b;
+    transform-origin: center;
+    opacity: 0.85;
+    border-radius: 1px;
+  }
+  .elim-line1 { transform: translateY(-50%) rotate(22deg); }
+  .elim-line2 { transform: translateY(-50%) rotate(-22deg); }
+
+  /* ── MONEY BAG ── */
   .money-bag {
     position: absolute;
     bottom: 6px;
@@ -206,8 +217,6 @@
     font-size: 18px;
     line-height: 1;
   }
-
-  /* ── FOOTER ── */
   footer {
     border-top: 1px solid var(--border);
     padding: 12px 50px;
@@ -217,31 +226,25 @@
     gap: 40px;
     flex-shrink: 0;
   }
-
   .footer-info {
     font-size: clamp(0.75rem, 1vw, 0.9rem);
     color: var(--muted);
   }
-
   .footer-info strong {
     color: var(--text);
     font-weight: 700;
   }
-
   .footer-howto {
     font-size: clamp(0.7rem, 0.9vw, 0.85rem);
     color: var(--muted);
     text-align: right;
   }
-
-  /* ── ACCENT COLORS ── */
   .country-tag.ct-0 { background: var(--accent1); }
   .country-tag.ct-1 { background: var(--accent2); }
   .country-tag.ct-2 { background: var(--accent3); }
   .country-tag.ct-3 { background: var(--accent4); }
   .country-tag.ct-4 { background: var(--accent5); }
   .country-tag.ct-5 { background: var(--accent6); }
-
   .empty-state {
     grid-column: 1/-1;
     text-align: center;
@@ -252,18 +255,19 @@
 </style>
 </head>
 <body>
-
 <script>
 /* ============================================================
    BREYTTU HÉR — uppfærðu þátttakendur og stillingar
    ============================================================ */
-
 const config = {
   title: "HM 2026⚽🏆",
   subtitle: "Veðmál í Mýrinni - Hvaða land vinnur HM?",
   betPerCountry: 500,
   finalDate: "2026-07-19",
-  contactNote: "Megi fótboltaguðirnir vera ykkur hliðhollir!"
+  contactNote: "Megi fótboltaguðirnir vera ykkur hliðhollir!",
+
+  // Bættu við löndum sem hafa verið útslitnað:
+  eliminated: ["Panama"],
 };
 
 const participants = [
@@ -289,22 +293,19 @@ const participants = [
   { name: "Kristinn",        countries: ["Þýskaland", "Portúgal"],       avatar: null, paid: "yes" },
   { name: "Atli Björgvins",  countries: ["Spánn", "Egyptaland"],         avatar: null, paid: "yes" },
   { name: "Anna Schalk",     countries: ["Holland"],                      avatar: null, paid: "yes" },
-  { name: "Ásta ",            countries: ["Kólumbía", "Spánn"],           avatar: null, paid: "no" },
+  { name: "Ásta ",           countries: ["Kólumbía", "Spánn"],           avatar: null, paid: "no" },
   { name: "Gísli",           countries: ["Frakkland", "Brasilía"],       avatar: null, paid: "yes" },
- { name: "Elísa",           countries: ["Portúgal", "Brasilía"],        avatar: null, paid: "yes" },
+  { name: "Elísa",           countries: ["Portúgal", "Brasilía"],        avatar: null, paid: "yes" },
   { name: "María",           countries: ["Frakkland", "Argentína"],      avatar: null, paid: "yes" },
   { name: "Magnús Daði",     countries: ["England", "Spánn"],            avatar: null, paid: "yes" },
- { name: "Marín",           countries: ["Belgía", "Spánn"],             avatar: null, paid: "no" },
- { name: "Andrea",          countries: ["Brasilía", "Portúgal"],        avatar: null, paid: "no" },
-  { name: "Halla ",           countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
+  { name: "Marín",           countries: ["Belgía", "Spánn"],             avatar: null, paid: "no" },
+  { name: "Andrea",          countries: ["Brasilía", "Portúgal"],        avatar: null, paid: "no" },
+  { name: "Halla ",          countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
   { name: "Sunna",           countries: ["Egyptaland", "Frakkland"],     avatar: null, paid: "yes" },
-  { name: "Hjalti ",          countries: ["Spánn"],                       avatar: null, paid: "no" },
-  { name: "Aron",           countries: ["Þýskaland", "England"],     avatar: null, paid: "yes" },
+  { name: "Hjalti ",         countries: ["Spánn"],                       avatar: null, paid: "no" },
+  { name: "Aron",            countries: ["Þýskaland", "England"],        avatar: null, paid: "yes" },
 ];
 
-/* ============================================================
-   FÁNALYKILTAFLA — þarft ekki að breyta þessu
-   ============================================================ */
 const flagMap = {
   "Argentína":"ar","Brasilía":"br","Frakkland":"fr","Þýskaland":"de",
   "Spánn":"es","Portúgal":"pt","England":"gb-eng","Noregur":"no",
@@ -345,12 +346,10 @@ const flagMap = {
     <div class="countdown-badge" id="countdown-display"></div>
   </div>
 </header>
-
 <div class="grid-section">
   <div class="section-label" id="count-label"></div>
   <div class="participants-grid" id="grid"></div>
 </div>
-
 <footer>
   <div class="footer-info">
     <strong>Skyggnigáfa verður umbunuð</strong> í mótslok. Potturinn skiptist milli þeirra sem spá rétt.
@@ -361,20 +360,21 @@ const flagMap = {
 <script>
 const accentColors = ["#C8F0C0","#C0D8F5","#E8C8F5","#F5EAC0","#F5C8C8","#C0F0E8"];
 
-function getFlag(country) {
+function getFlagImg(country, eliminated) {
   const code = flagMap[country];
   if (!code) return `<span style="font-size:0.9rem">🏳</span>`;
+  if (eliminated) {
+    return `<span class="flag-wrap"><img class="country-flag" src="https://flagcdn.com/w40/${code}.png" alt="${country}"><span class="flag-overlay"></span></span>`;
+  }
   return `<img class="country-flag" src="https://flagcdn.com/w40/${code}.png" alt="${country}">`;
 }
 
 function getInitials(name) {
   return name.trim().split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
 }
-
 function calcPot() {
   return participants.reduce((s, p) => s + (p.countries || []).length * config.betPerCountry, 0);
 }
-
 function updateCountdown() {
   const final = new Date(config.finalDate + "T00:00:00");
   const now = new Date();
@@ -385,7 +385,6 @@ function updateCountdown() {
   else if (days === 0) el.textContent = `Úrslit verða ljós Í DAG 🏆`;
   else                 el.textContent = `Mótið er lokið 🏆`;
 }
-
 function renderGrid() {
   const grid = document.getElementById("grid");
   grid.innerHTML = "";
@@ -393,12 +392,12 @@ function renderGrid() {
     grid.innerHTML = `<div class="empty-state">Enginn hefur skráð sig ennþá — vertu fyrstur! 🏆</div>`;
     return;
   }
+  const elim = new Set(config.eliminated || []);
   participants.forEach((p, i) => {
     const color = accentColors[i % accentColors.length];
     const card = document.createElement("div");
     card.className = "card";
 
-    // Avatar
     const avatarDiv = document.createElement("div");
     avatarDiv.className = "avatar";
     avatarDiv.style.background = color;
@@ -407,7 +406,6 @@ function renderGrid() {
     const avatarSrc = p.avatar || `https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=${seed}&backgroundColor=${bg}`;
     avatarDiv.innerHTML = `<img src="${avatarSrc}" alt="${p.name}" onerror="this.parentNode.textContent='${getInitials(p.name)}'">`;
 
-    // Info
     const infoDiv = document.createElement("div");
     infoDiv.className = "card-info";
     infoDiv.innerHTML = `<div class="card-name">${p.name}</div>`;
@@ -416,45 +414,43 @@ function renderGrid() {
     countriesDiv.className = "card-countries";
     (p.countries || []).forEach((c, ci) => {
       const tag = document.createElement("span");
-      tag.className = `country-tag ct-${(i + ci) % 6}`;
-      tag.innerHTML = `${getFlag(c)} ${c}`;
+      const isElim = elim.has(c);
+      if (isElim) {
+        tag.className = "country-tag eliminated";
+        tag.innerHTML = `${getFlagImg(c, true)} <span class="elim-name">${c}<span class="elim-line1"></span><span class="elim-line2"></span></span>`;
+      } else {
+        tag.className = `country-tag ct-${(i + ci) % 6}`;
+        tag.innerHTML = `${getFlagImg(c, false)} ${c}`;
+      }
       countriesDiv.appendChild(tag);
     });
     infoDiv.appendChild(countriesDiv);
-
     card.appendChild(avatarDiv);
     card.appendChild(infoDiv);
 
-    // Aðeins ef paid er "yes"
     if (p.paid === "yes") {
       const moneyBagDiv = document.createElement("div");
       moneyBagDiv.className = "money-bag";
       moneyBagDiv.textContent = "💰";
       card.appendChild(moneyBagDiv);
     }
-
     grid.appendChild(card);
   });
 }
-
 function render() {
   document.getElementById("main-title").textContent = config.title;
   document.getElementById("main-subtitle").textContent = config.subtitle;
   document.getElementById("pot-display").textContent =
     calcPot().toLocaleString("is-IS") + " kr.";
-
   const n = participants.length;
   const bets = participants.reduce((s, p) => s + (p.countries || []).length, 0);
   document.getElementById("count-label").textContent =
     n === 0 ? "Þátttakendur" : `${n} þátttakend${n === 1 ? "i" : "ur"} · ${bets} veð`;
-
   document.getElementById("footer-note").textContent = config.contactNote;
-
   updateCountdown();
   setInterval(updateCountdown, 60000);
   renderGrid();
 }
-
 render();
 </script>
 </body>
