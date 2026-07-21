@@ -2,6 +2,492 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HM 2026 · Sigurvegarar 🏆</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
+  :root {
+    --bg: #EEEEEA;
+    --card: #FFFFFF;
+    --text: #111111;
+    --muted: #666666;
+    --border: #DDDDDA;
+    --gold: #F5D060;
+    --gold-light: #FFFBE8;
+    --gold-border: #DEC040;
+    --accent1: #C8F0C0;
+    --accent2: #C0D8F5;
+    --accent3: #E8C8F5;
+    --accent4: #F5EAC0;
+    --accent5: #F5C8C8;
+    --accent6: #C0F0E8;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 16px 50px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    gap: 20px;
+    flex-shrink: 0;
+  }
+  .header-left h1 {
+    font-size: clamp(1.8rem, 3vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .header-left .subtitle {
+    font-size: clamp(0.75rem, 1.1vw, 1rem);
+    color: var(--muted);
+    margin-top: 5px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .header-right {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .champion-label {
+    font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .champion-name {
+    font-size: clamp(1.5rem, 2.5vw, 2.6rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  .champion-name img {
+    height: clamp(24px, 2.4vw, 34px);
+    width: auto;
+    border-radius: 2px;
+    vertical-align: middle;
+  }
+  .champion-sub {
+    font-size: clamp(0.65rem, 0.85vw, 0.8rem);
+    font-weight: 600;
+    color: var(--muted);
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+  .main-area {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 50px 10px;
+  }
+  .winners-section {
+    flex: 2;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .others-section {
+    flex: 3;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .section-label {
+    font-size: clamp(0.62rem, 0.8vw, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 8px;
+    flex-shrink: 0;
+  }
+  .section-label .gold-text {
+    color: #9A7010;
+    font-weight: 700;
+  }
+  .section-divider {
+    flex-shrink: 0;
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 10px 0;
+  }
+  .winners-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    flex: 1;
+    min-height: 0;
+    align-content: stretch;
+  }
+  .others-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    flex: 1;
+    min-height: 0;
+    align-content: stretch;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .card.winner-card {
+    background: var(--gold-light);
+    border-color: var(--gold-border);
+    border-left: 3px solid var(--gold);
+  }
+  .avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.6);
+    overflow: hidden;
+  }
+  .winner-card .avatar {
+    width: 64px;
+    height: 64px;
+  }
+  .avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  .card-info {
+    flex: 1;
+    min-width: 0;
+    padding-right: 14px;
+  }
+  .card-name {
+    font-size: clamp(0.9rem, 1.1vw, 1.1rem);
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.1;
+  }
+  .winner-card .card-name {
+    font-size: clamp(1rem, 1.25vw, 1.25rem);
+  }
+  .prize-tag {
+    display: inline-block;
+    font-size: clamp(0.72rem, 0.9vw, 0.85rem);
+    font-weight: 700;
+    color: #7A5808;
+    background: var(--gold);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
+  }
+  .card-countries {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 5px;
+  }
+  .country-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 2px;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+  }
+  .country-flag {
+    width: 18px;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 1px;
+  }
+  .country-tag.winner-country {
+    background: var(--gold);
+    color: #6B4E10;
+    font-weight: 800;
+  }
+  .country-tag.ct-0 { background: var(--accent1); }
+  .country-tag.ct-1 { background: var(--accent2); }
+  .country-tag.ct-2 { background: var(--accent3); }
+  .country-tag.ct-3 { background: var(--accent4); }
+  .country-tag.ct-4 { background: var(--accent5); }
+  .country-tag.ct-5 { background: var(--accent6); }
+  .money-bag {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    font-size: 16px;
+    line-height: 1;
+  }
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 11px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-shrink: 0;
+  }
+  .footer-event {
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    color: var(--muted);
+  }
+  .footer-event strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .footer-payment {
+    font-size: clamp(0.7rem, 0.9vw, 0.85rem);
+    color: var(--muted);
+    text-align: right;
+  }
+  .footer-payment strong {
+    color: var(--text);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<script>
+const config = {
+  title: "HM 2026⚽🏆",
+  subtitle: "Veðmál í Mýrinni - Hvaða land vinnur HM?",
+  betPerCountry: 500,
+  winnerCountry: "Spánn",
+};
+const participants = [
+  { name: "Karl Pétur",      countries: ["Frakkland", "Noregur"],       avatar: null, paid: "yes" },
+  { name: "Gerður",          countries: ["England", "Frakkland"],        avatar: null, paid: "yes" },
+  { name: "Klara Rut",       countries: ["Argentína", "England"],        avatar: null, paid: "no" },
+  { name: "Davíð",           countries: ["Brasilía"],                    avatar: null, paid: "yes" },
+  { name: "Guðmundur",       countries: ["Spánn", "Noregur"],           avatar: null, paid: "yes" },
+  { name: "Jóhanna Soffía",  countries: ["Portúgal"],                   avatar: null, paid: "yes" },
+  { name: "Haraldur",        countries: ["England", "Brasilía"],         avatar: null, paid: "yes" },
+  { name: "Brynja",          countries: ["Frakkland", "Þýskaland"],      avatar: null, paid: "yes" },
+  { name: "Eyþór",           countries: ["Frakkland", "Brasilía"],       avatar: null, paid: "yes" },
+  { name: "Sveinbjörn",      countries: ["Spánn"],                       avatar: null, paid: "yes" },
+  { name: "Tinni",           countries: ["Portúgal", "Holland"],         avatar: null, paid: "yes" },
+  { name: "Áslaug",          countries: ["Holland", "Frakkland"],        avatar: null, paid: "yes" },
+  { name: "Auður",           countries: ["Panama", "England"],           avatar: null, paid: "yes" },
+  { name: "Lilja Dögg",      countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
+  { name: "Óttar",           countries: ["Portúgal", "Spánn"],          avatar: null, paid: "yes" },
+  { name: "Anna Margrét",    countries: ["Senegal", "Brasilía"],         avatar: null, paid: "no" },
+  { name: "Atli Þór",        countries: ["Bandaríkin", "Frakkland"],     avatar: null, paid: "yes" },
+  { name: "Graham",          countries: ["Holland"],                      avatar: null, paid: "no" },
+  { name: "Guðjón",          countries: ["Argentína", "Holland"],        avatar: null, paid: "no" },
+  { name: "Kristinn",        countries: ["Þýskaland", "Portúgal"],       avatar: null, paid: "yes" },
+  { name: "Atli Björgvins",  countries: ["Spánn", "Egyptaland"],         avatar: null, paid: "yes" },
+  { name: "Anna Schalk",     countries: ["Holland"],                      avatar: null, paid: "yes" },
+  { name: "Ásta",            countries: ["Kólumbía", "Spánn"],           avatar: null, paid: "yes" },
+  { name: "Gísli",           countries: ["Frakkland", "Brasilía"],       avatar: null, paid: "yes" },
+  { name: "Elísa",           countries: ["Portúgal", "Brasilía"],        avatar: null, paid: "yes" },
+  { name: "María",           countries: ["Frakkland", "Argentína"],      avatar: null, paid: "yes" },
+  { name: "Magnús Daði",     countries: ["England", "Spánn"],            avatar: null, paid: "yes" },
+  { name: "Marín",           countries: ["Belgía", "Spánn"],             avatar: null, paid: "yes" },
+  { name: "Andrea",          countries: ["Brasilía", "Portúgal"],        avatar: null, paid: "yes" },
+  { name: "Halla",           countries: ["Argentína", "Frakkland"],      avatar: null, paid: "no" },
+  { name: "Sunna",           countries: ["Egyptaland", "Frakkland"],     avatar: null, paid: "yes" },
+  { name: "Hjalti",          countries: ["Spánn"],                       avatar: null, paid: "yes" },
+  { name: "Aron",            countries: ["Þýskaland", "England"],        avatar: null, paid: "yes" },
+];
+const flagMap = {
+  "Argentína":"ar","Brasilía":"br","Frakkland":"fr","Þýskaland":"de",
+  "Spánn":"es","Portúgal":"pt","England":"gb-eng","Noregur":"no",
+  "Svíþjóð":"se","Danmörk":"dk","Holland":"nl","Belgía":"be",
+  "Ítalía":"it","Króatía":"hr","Serbía":"rs","Sviss":"ch",
+  "Austurríki":"at","Pólland":"pl","Ungverjaland":"hu","Tékkland":"cz",
+  "Rúmenía":"ro","Skotland":"gb-sct","Wales":"gb-wls","Tyrkland":"tr",
+  "Úkraína":"ua","Grikkland":"gr","Slóvakía":"sk","Albanía":"al",
+  "Slóvenía":"si","Finnland":"fi","Bandaríkin":"us","Mexíkó":"mx",
+  "Kanada":"ca","Kosta Ríka":"cr","Jamaíka":"jm","Panama":"pa",
+  "Úrúgvæ":"uy","Kólumbía":"co","Ekvaðor":"ec","Perú":"pe",
+  "Venesúela":"ve","Bolívía":"bo","Japán":"jp","Suður-Kórea":"kr",
+  "Ástralía":"au","Nýja Sjáland":"nz","Íran":"ir","Sádí-Arabía":"sa",
+  "Marókkó":"ma","Senegal":"sn","Gana":"gh","Nígería":"ng",
+  "Kaamerún":"cm","Egyptaland":"eg","Alabú":"ae","Katarland":"qa",
+  "Írak":"iq","Ísland":"is",
+};
+</script>
+
+<header>
+  <div class="header-left">
+    <h1 id="main-title"></h1>
+    <div class="subtitle" id="main-subtitle"></div>
+  </div>
+  <img src="https://images.squarespace-cdn.com/content/69fb44a6a62ffb437e1b61be/de182da0-7a95-4775-8531-c465482f22e1/new-viso-logo.png?format=2500w&content-type=image%2Fpng" alt="Logo" style="height:52px;width:auto;object-fit:contain;opacity:0.85;">
+  <div class="header-right">
+    <div class="champion-label">🏆 HEIMSMEISTARI 2026</div>
+    <div class="champion-name">
+      <img src="https://flagcdn.com/w40/es.png" alt="Spánn"> Spánn
+    </div>
+    <div class="champion-sub">Hafa ekki tapað 38 leiki í röð.</div>
+  </div>
+</header>
+
+<div class="main-area">
+  <div class="winners-section">
+    <div class="section-label" id="winners-label"></div>
+    <div class="winners-grid" id="winners-grid"></div>
+  </div>
+
+  <hr class="section-divider">
+
+  <div class="others-section">
+    <div class="section-label">Takk fyrir þátttökuna!</div>
+    <div class="others-grid" id="others-grid"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-event">
+    🍕 <strong>Pizzuhádegi fimmtudaginn 6. ágúst klukkan 12:00</strong> — sigurvegarar verða krýndir og fá verðlaunin sín
+  </div>
+  <div class="footer-payment">
+    Ekki búinn að borga? 💰 <strong>Greiddu fyrir 6. ágúst</strong>
+  </div>
+</footer>
+
+<script>
+const accentColors = ["#C8F0C0","#C0D8F5","#E8C8F5","#F5EAC0","#F5C8C8","#C0F0E8"];
+
+function getFlagImg(country) {
+  const code = flagMap[country];
+  if (!code) return `<span style="font-size:0.9rem">🏳</span>`;
+  return `<img class="country-flag" src="https://flagcdn.com/w40/${code}.png" alt="${country}">`;
+}
+
+function getInitials(name) {
+  return name.trim().split(/\s+/).map(w => w[0]).join("").slice(0, 2).toUpperCase();
+}
+
+function makeCard(p, globalIdx, isWinner, prize) {
+  const color = accentColors[globalIdx % accentColors.length];
+  const card = document.createElement("div");
+  card.className = isWinner ? "card winner-card" : "card";
+
+  const avatarDiv = document.createElement("div");
+  avatarDiv.className = "avatar";
+  avatarDiv.style.background = color;
+  const seed = encodeURIComponent(p.name);
+  const bg = color.replace("#", "");
+  const avatarSrc = p.avatar || `https://api.dicebear.com/8.x/adventurer-neutral/svg?seed=${seed}&backgroundColor=${bg}`;
+  avatarDiv.innerHTML = `<img src="${avatarSrc}" alt="${p.name}" onerror="this.parentNode.textContent='${getInitials(p.name)}'">`;
+
+  const infoDiv = document.createElement("div");
+  infoDiv.className = "card-info";
+  infoDiv.innerHTML = `<div class="card-name">${p.name.trim()}</div>`;
+
+  if (isWinner) {
+    const prizeTag = document.createElement("div");
+    prizeTag.className = "prize-tag";
+    prizeTag.textContent = `🏆 ${prize.toLocaleString("is-IS")} kr.`;
+    infoDiv.appendChild(prizeTag);
+  }
+
+  const countriesDiv = document.createElement("div");
+  countriesDiv.className = "card-countries";
+  (p.countries || []).forEach((c, ci) => {
+    const tag = document.createElement("span");
+    if (c === config.winnerCountry) {
+      tag.className = "country-tag winner-country";
+    } else {
+      tag.className = `country-tag ct-${(globalIdx + ci) % 6}`;
+    }
+    tag.innerHTML = `${getFlagImg(c)} ${c}`;
+    countriesDiv.appendChild(tag);
+  });
+  infoDiv.appendChild(countriesDiv);
+
+  card.appendChild(avatarDiv);
+  card.appendChild(infoDiv);
+
+  if (p.paid === "yes") {
+    const bag = document.createElement("div");
+    bag.className = "money-bag";
+    bag.textContent = "💰";
+    card.appendChild(bag);
+  }
+
+  return card;
+}
+
+function render() {
+  document.getElementById("main-title").textContent = config.title;
+  document.getElementById("main-subtitle").textContent = config.subtitle;
+
+  const pot = participants.reduce((s, p) => s + p.countries.length * config.betPerCountry, 0);
+  const winnersList = participants.filter(p => p.countries.includes(config.winnerCountry));
+  const othersList = participants.filter(p => !p.countries.includes(config.winnerCountry));
+  const prize = Math.floor(pot / winnersList.length);
+
+  document.getElementById("winners-label").innerHTML =
+    `<span class="gold-text">🏆 ${winnersList.length} sigurvegarar</span> · Pottur: ${pot.toLocaleString("is-IS")} kr. · Hlutur hvers: ${prize.toLocaleString("is-IS")} kr.`;
+
+  const winnersGrid = document.getElementById("winners-grid");
+  winnersList.forEach(p => {
+    const idx = participants.indexOf(p);
+    winnersGrid.appendChild(makeCard(p, idx, true, prize));
+  });
+
+  const othersGrid = document.getElementById("others-grid");
+  othersList.forEach(p => {
+    const idx = participants.indexOf(p);
+    othersGrid.appendChild(makeCard(p, idx, false, 0));
+  });
+}
+
+render();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+++++++
+
+
+
+
+<html lang="is">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HM 2026 · Veðmál í Mýrinni</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap');
@@ -456,3 +942,4 @@ render();
 </script>
 </body>
 </html>
+
