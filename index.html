@@ -413,7 +413,7 @@ function makeCard(p, globalIdx, isWinner, prize) {
   if (isWinner) {
     const prizeTag = document.createElement("div");
     prizeTag.className = "prize-tag";
-    prizeTag.textContent = `🏆 ${prize.toLocaleString("is-IS")} kr.`;
+    prizeTag.textContent = `🏆 ${prize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} kr.`;
     infoDiv.appendChild(prizeTag);
   }
 
@@ -454,7 +454,7 @@ function render() {
   const prize = Math.floor(pot / winnersList.length);
 
   document.getElementById("winners-label").innerHTML =
-    `<span class="gold-text">🏆 ${winnersList.length} sigurvegarar</span> · Pottur: ${pot.toLocaleString("is-IS")} kr. · Hlutur hvers: ${prize.toLocaleString("is-IS")} kr.`;
+    `<span class="gold-text">🏆 ${winnersList.length} sigurvegarar</span> · Pottur: ${prize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} kr. · Hlutur hvers: ${prize.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} kr.`;
 
   const winnersGrid = document.getElementById("winners-grid");
   winnersList.forEach(p => {
