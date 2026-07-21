@@ -267,7 +267,7 @@ const config = {
   contactNote: "Megi fótboltaguðirnir vera ykkur hliðhollir!",
 
   // Bættu við löndum sem hafa verið útslitnað:
-  eliminated: ["Þýskaland", "Holland", "Panama", "Senegal", "Brasilía", "Portúgal", "Mexíkó", "Bandaríkin", "Egyptaland", "Kólumbía", "Noregur", "Belgía", "Frakkland"],
+  eliminated: ["Þýskaland", "Holland", "Panama", "Senegal", "Brasilía", "Portúgal", "Mexíkó", "Bandaríkin", "Egyptaland", "Kólumbía", "Noregur", "Belgía", "Frakkland", "England"],
 };
 
 const participants = [
@@ -384,7 +384,7 @@ function updateCountdown() {
   if (days > 1)        el.textContent = `Úrslit verða ljós eftir ${days} daga`;
   else if (days === 1) el.textContent = `Úrslit verða ljós á morgun`;
   else if (days === 0) el.textContent = `Úrslit verða ljós Í DAG 🏆`;
-  else                 el.textContent = `Mótið er lokið 🏆`;
+  else                 el.textContent = `Mótinu er lokið 🏆`;
 }
 function renderGrid() {
   const grid = document.getElementById("grid");
